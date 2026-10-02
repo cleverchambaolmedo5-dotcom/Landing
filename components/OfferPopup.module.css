@@ -1,0 +1,66 @@
+/* Entrada del pop-up + "zoom" ligero y continuo a modo de alerta */
+
+.dialog {
+  margin: auto;
+  max-width: none;
+  max-height: 100dvh;
+  padding: 0;
+  background: transparent;
+  /* Pantallas bajas: permite desplazarse dentro del pop-up */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.dialog::backdrop {
+  background: rgb(11 22 40 / 0.78);
+  backdrop-filter: blur(4px);
+}
+
+.dialog[open]::backdrop {
+  animation: fade-in 300ms ease-out;
+}
+
+.card {
+  animation:
+    pop-in 550ms cubic-bezier(0.22, 1, 0.36, 1) both,
+    pulse 2.6s ease-in-out 900ms infinite;
+  transform-origin: center;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Zoom suave tipo "latido": llama la atención sin ser agresivo */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.025);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
+  }
+
+  .dialog[open]::backdrop {
+    animation: none;
+  }
+}
