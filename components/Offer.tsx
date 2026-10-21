@@ -6,7 +6,7 @@ import Icon, { type IconName } from "./ui/Icon";
 import Reveal from "./ui/Reveal";
 
 /** Iconos en el mismo orden que `eventConfig.includes` (si se agrega un ítem, usa "check"). */
-const includeIcons: IconName[] = ["clock", "award", "utensils", "coffee", "chat"];
+const includeIcons: IconName[] = ["clock", "award", "utensils", "chat"];
 
 const details: { label: string; value: Pending; icon: IconName }[] = [
   { label: "Fecha", value: eventConfig.date, icon: "calendar" },
