@@ -2,7 +2,6 @@ import EventIntro from "@/components/EventIntro";
 import FAQ from "@/components/FAQ";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import LearnSection from "@/components/LearnSection";
 import Problem from "@/components/Problem";
 import Testimonials from "@/components/Testimonials";
 import Transformation from "@/components/Transformation";
@@ -18,7 +17,6 @@ export default function Home() {
         <Hero />
         <Problem />
         <EventIntro />
-        <LearnSection />
         <Transformation />
         <Testimonials />
         <Offer />

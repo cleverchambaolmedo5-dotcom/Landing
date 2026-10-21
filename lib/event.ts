@@ -86,6 +86,5 @@ export function getCtaHref(): string {
 export const navigation = [
   { label: "Inicio", href: "#inicio" },
   { label: "El Evento", href: "#evento" },
-  { label: "Qué aprenderás", href: "#aprenderas" },
   { label: "Testimonios", href: "#testimonios" },
 ] as const;
