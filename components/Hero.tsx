@@ -46,15 +46,16 @@ export default function Hero() {
 
           <Reveal delay={120}>
             <h1 className="mt-7 font-display text-[1.85rem] leading-[1.08] font-extrabold tracking-tight text-balance uppercase sm:text-5xl lg:text-[2.5rem] xl:text-[2.85rem]">
-              Aprende a ver <span className="text-accent">oportunidades</span> donde otros solo ven
-              propiedades.
+              ¿Trabajas cada vez más, pero <span className="text-accent">tu dinero no crece</span> como
+              esperabas?
             </h1>
           </Reveal>
 
           <Reveal delay={180}>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-pretty text-white/70 sm:mt-6 sm:text-lg">
-              Una experiencia presencial para aprender a identificar oportunidades inmobiliarias,
-              analizar inversiones y comenzar a construir una visión diferente sobre tu patrimonio.
+              Únete a WAKE UP: Riqueza Inmobiliaria, una experiencia presencial donde aprenderás a
+              identificar oportunidades inmobiliarias, analizar inversiones y descubrir nuevas formas de
+              construir patrimonio, incluso si todavía no sabes por dónde empezar.
             </p>
           </Reveal>
 
@@ -77,7 +78,7 @@ export default function Hero() {
           <Reveal delay={300}>
             <div className="mt-8 lg:mt-9">
               <CTAButton size="lg" className="w-full sm:w-auto sm:min-w-[17rem]">
-                Quiero mi entrada
+                Estoy listo para empezar
               </CTAButton>
               <p className="mt-4 flex items-center justify-center gap-2 text-[13px] text-white/60 sm:justify-start">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
