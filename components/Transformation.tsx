@@ -1,78 +1,144 @@
+import Image, { type StaticImageData } from "next/image";
+import type { ReactNode } from "react";
+import galeria1 from "@/public/galeria1.jpeg";
+import galeria2 from "@/public/galeria2.jpeg";
+import galeria4 from "@/public/galeria4.jpeg";
 import CTAButton from "./CTAButton";
-import ImagePlaceholder from "./ImagePlaceholder";
-import SectionTitle from "./SectionTitle";
 import Container from "./ui/Container";
-import Icon from "./ui/Icon";
+import Icon, { type IconName } from "./ui/Icon";
 import Reveal from "./ui/Reveal";
 
-const before = [
-  "No sé por dónde comenzar.",
-  "Creo que necesito muchísimo dinero.",
-  "No sé reconocer una buena oportunidad.",
-  "Tengo miedo de equivocarme.",
-  "No sé qué analizar.",
+interface Benefit {
+  number: string;
+  icon: IconName;
+  title: ReactNode;
+  description: ReactNode;
+  image: { src: StaticImageData; alt: string };
+}
+
+const benefits: Benefit[] = [
+  {
+    number: "01",
+    icon: "trending",
+    title: (
+      <>
+        <span className="text-accent">Estrategias probadas</span> para empezar en bienes raíces
+      </>
+    ),
+    description: (
+      <>
+        Aprenderás de manera práctica diferentes <strong>modelos de inversión inmobiliaria</strong>, cómo{" "}
+        <strong>analizar oportunidades</strong> y qué aspectos debes evaluar para comenzar a{" "}
+        <strong>construir tu patrimonio</strong>, incluso si estás empezando.
+      </>
+    ),
+    image: { src: galeria2, alt: "Ponente de Wake Up enseñando a los asistentes durante el evento" },
+  },
+  {
+    number: "02",
+    icon: "chat",
+    title: (
+      <>
+        <span className="text-accent">Asesoría personalizada</span> de todo nuestro equipo de trabajo
+      </>
+    ),
+    description: (
+      <>
+        Tendrás la oportunidad de recibir <strong>orientación de nuestro equipo</strong>,{" "}
+        <strong>resolver tus dudas</strong> y conocer perspectivas prácticas para evaluar tus ideas de inversión
+        según <strong>tu situación y tus objetivos</strong>.
+      </>
+    ),
+    image: { src: galeria1, alt: "Equipo de Wake Up conversando con los asistentes del evento" },
+  },
+  {
+    number: "03",
+    icon: "award",
+    title: (
+      <>
+        <span className="text-accent">Certificación digital</span> de participación
+      </>
+    ),
+    description: (
+      <>
+        Recibirás una <strong>certificación digital</strong> que acredita tu participación en WAKE UP: Riqueza
+        Inmobiliaria, como reconocimiento a tu <strong>compromiso con el aprendizaje</strong> y tu desarrollo
+        financiero.
+      </>
+    ),
+    image: { src: galeria4, alt: "Asistente celebrando su participación en el evento Wake Up" },
+  },
 ];
 
-const after = [
-  "Entiendo qué debo analizar.",
-  "Conozco diferentes estrategias.",
-  "Tengo una visión más clara.",
-  "Sé identificar variables importantes.",
-  "Salgo con una dirección más clara.",
-];
+/** Borde irregular tipo papel rasgado para la franja azul marino. */
+function TornEdge({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 1200 24"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      focusable="false"
+      className={`block h-3 w-full text-navy sm:h-5 ${className}`}
+    >
+      <path
+        fill="currentColor"
+        d="M0 24V14l40-6 45 7 45-9 40 6 50-8 45 9 45-6 50 8 40-10 50 6 45-8 45 9 50-5 40 8 50-9 45 6 45-8 50 9 45-5 45 7 45-10 45 6 50-7 45 9 45-6 60 5v12Z"
+      />
+    </svg>
+  );
+}
 
 export default function Transformation() {
   return (
     <section id="experiencia" className="bg-mist py-20 sm:py-28">
+      {/* Encabezado: franja azul marino con bordes rasgados */}
+      <Reveal>
+        <TornEdge className="-mb-px" />
+        <div className="bg-grid-dark bg-navy py-10 sm:py-14">
+          <Container>
+            <h2 className="mx-auto max-w-4xl text-center font-display text-[1.6rem] leading-[1.15] font-extrabold tracking-tight text-balance text-white uppercase sm:text-4xl lg:text-[2.75rem]">
+              Lo que obtendrás en el <span className="text-accent">evento presencial</span>:
+            </h2>
+          </Container>
+        </div>
+        <TornEdge className="-mt-px rotate-180" />
+      </Reveal>
+
       <Container>
-        <Reveal>
-          <SectionTitle align="center" eyebrow="La transformación" title="Tu realidad puede ser diferente." />
-        </Reveal>
+        <div className="mx-auto mt-14 grid max-w-xl gap-6 sm:mt-16 lg:max-w-none lg:grid-cols-3 lg:gap-7">
+          {benefits.map(({ number, icon, title, description, image }, index) => (
+            <Reveal key={number} delay={index * 120} className="h-full">
+              <article className="flex h-full flex-col rounded-3xl border border-navy/10 bg-white p-6 shadow-[0_24px_50px_-35px_rgb(20_38_66/0.45)] sm:p-7">
+                <div className="flex items-center justify-between">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent font-display text-lg font-extrabold text-white shadow-[0_12px_30px_-10px_rgb(245_106_10/0.7)]">
+                    {number}
+                  </span>
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10 text-accent">
+                    <Icon name={icon} strokeWidth={1.8} className="h-6 w-6" />
+                  </span>
+                </div>
 
-        <div className="mt-14 grid items-stretch gap-6 lg:mt-16 lg:grid-cols-[1fr_auto_1fr] lg:gap-8">
-          {/* ANTES */}
-          <Reveal className="h-full">
-            <article className="flex h-full flex-col rounded-3xl border border-navy/10 bg-white p-5 sm:p-7">
-              <ImagePlaceholder label="Fotografía: antes" hint="Se agregará próximamente" aspect="wide" />
-              <p className="mt-7 font-display text-xs font-bold tracking-[0.3em] text-navy/45 uppercase">Antes</p>
-              <ul className="mt-5 space-y-4">
-                {before.map((item) => (
-                  <li key={item} className="flex items-start gap-3.5 text-[15px] leading-relaxed text-ink/65 sm:text-base">
-                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy/5 text-navy/40">
-                      <Icon name="x" strokeWidth={2} className="h-3.5 w-3.5" />
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </Reveal>
+                <h3 className="mt-6 font-display text-lg leading-snug font-extrabold text-balance text-navy uppercase sm:text-xl lg:min-h-[3lh]">
+                  {title}
+                </h3>
 
-          {/* Flecha */}
-          <div className="flex items-center justify-center" aria-hidden="true">
-            <span className="flex h-14 w-14 rotate-90 items-center justify-center rounded-full bg-accent text-white shadow-[0_12px_30px_-10px_rgb(245_106_10/0.7)] lg:rotate-0">
-              <Icon name="arrowRight" strokeWidth={2} className="h-6 w-6" />
-            </span>
-          </div>
+                <div className="relative mt-6 aspect-[4/3] overflow-hidden rounded-2xl bg-navy-800">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 36rem, 100vw"
+                    placeholder="blur"
+                    className="object-cover"
+                  />
+                </div>
 
-          {/* DESPUÉS */}
-          <Reveal delay={150} className="h-full">
-            <article className="relative flex h-full flex-col overflow-hidden rounded-3xl bg-navy p-5 text-white shadow-[0_30px_60px_-30px_rgb(20_38_66/0.6)] sm:p-7">
-              <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-accent" />
-              <ImagePlaceholder label="Fotografía: después" hint="Se agregará próximamente" aspect="wide" tone="dark" />
-              <p className="mt-7 font-display text-xs font-bold tracking-[0.3em] text-accent uppercase">Después</p>
-              <ul className="mt-5 space-y-4">
-                {after.map((item) => (
-                  <li key={item} className="flex items-start gap-3.5 text-[15px] leading-relaxed font-medium text-white/90 sm:text-base">
-                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
-                      <Icon name="check" strokeWidth={2.2} className="h-3.5 w-3.5" />
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </Reveal>
+                <p className="mt-6 text-[15px] leading-relaxed text-pretty text-ink/70 sm:text-base [&_strong]:font-semibold [&_strong]:text-navy">
+                  {description}
+                </p>
+              </article>
+            </Reveal>
+          ))}
         </div>
 
         <Reveal className="mt-14 text-center">
