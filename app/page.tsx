@@ -24,7 +24,7 @@ export default function Home() {
         <Offer />
         <FAQ />
       </main>
-      <OfferPopup trigger="timer" delayMs={10_000} title="Asegura tu lugar en Wake Up." storageKey="wu-popup-landing" />
+      <OfferPopup trigger="timer" delayMs={5_000} title="Asegura tu lugar en Wake Up." storageKey="wu-popup-landing" />
     </>
   );
 }
