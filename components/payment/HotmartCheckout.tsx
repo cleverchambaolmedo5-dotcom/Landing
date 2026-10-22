@@ -1,7 +1,27 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { eventConfig } from "@/lib/event";
 import Icon from "../ui/Icon";
+
+declare global {
+  interface Window {
+    /** Definido por el código base de Meta Pixel (components/analytics/MetaPixel.tsx). */
+    fbq?: (command: "track", event: string, params?: Record<string, string | number>) => void;
+  }
+}
+
+/** Envía InitiateCheckout al píxel ya inicializado. Si el píxel no cargó, no hace nada. */
+function trackInitiateCheckout() {
+  if (typeof window.fbq !== "function") return;
+  const price = Number(eventConfig.price);
+  window.fbq("track", "InitiateCheckout", {
+    content_name: eventConfig.name,
+    content_type: "product",
+    num_items: 1,
+    ...(Number.isFinite(price) ? { value: price, currency: eventConfig.currency } : {}),
+  });
+}
 
 interface HotmartCheckoutProps {
   /** Link de pago de Hotmart (eventConfig.checkoutUrl). */
@@ -24,6 +44,8 @@ export default function HotmartCheckout({ url, className = "" }: HotmartCheckout
   const [open, setOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  /** InitiateCheckout se envía una sola vez por visita a la página. */
+  const checkoutTracked = useRef(false);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -48,6 +70,10 @@ export default function HotmartCheckout({ url, className = "" }: HotmartCheckout
         target="_blank"
         rel="noopener noreferrer"
         onClick={(event) => {
+          if (!checkoutTracked.current) {
+            checkoutTracked.current = true;
+            trackInitiateCheckout();
+          }
           if (event.metaKey || event.ctrlKey || event.shiftKey) return;
           event.preventDefault();
           setOpen(true);
