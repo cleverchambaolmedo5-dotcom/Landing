@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { getCtaHref } from "@/lib/event";
-import type { MetaClickEvent } from "@/lib/meta-pixel";
 import Icon from "./ui/Icon";
 
 type Variant = "primary" | "outline-light" | "outline-dark";
@@ -18,8 +17,6 @@ interface CTAButtonProps {
   onClick?: () => void;
   /** Abre el enlace en una pestaña nueva (WhatsApp, Hotmart). */
   external?: boolean;
-  /** Evento de Meta Pixel a registrar al hacer clic (ver components/analytics/MetaPixelEvents). */
-  metaEvent?: MetaClickEvent;
 }
 
 const variants: Record<Variant, string> = {
@@ -45,13 +42,11 @@ export default function CTAButton({
   className = "",
   onClick,
   external = false,
-  metaEvent,
 }: CTAButtonProps) {
   return (
     <a
       href={href}
       onClick={onClick}
-      data-meta-event={metaEvent}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={`group inline-flex items-center justify-center gap-3 rounded-full text-center font-display font-bold tracking-[0.06em] uppercase sm:whitespace-nowrap sm:tracking-[0.08em] transition duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent active:translate-y-0 ${variants[variant]} ${sizes[size]} ${fullWidth ? "w-full" : ""} ${className}`}
     >

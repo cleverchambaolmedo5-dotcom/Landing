@@ -1,12 +1,17 @@
 import Script from "next/script";
-import { META_PIXEL_ID } from "@/lib/meta-pixel";
-import MetaPixelEvents from "./MetaPixelEvents";
 
 /**
- * Código base oficial de Meta Pixel. Se monta una sola vez en el layout raíz.
- * `beforeInteractive` lo coloca en el <head> del HTML inicial: `fbq` existe antes de la hidratación,
- * de modo que los eventos de los componentes cliente nunca se pierden. El script fbevents.js
- * se sigue descargando de forma asíncrona y no bloquea la página.
+ * ID de Meta Pixel. Se define con NEXT_PUBLIC_META_PIXEL_ID y se incrusta durante `next build`,
+ * así que la variable debe existir en el entorno de build (Hostinger) antes de compilar.
+ * Solo se acepta un ID numérico (se inserta en un script inline); si falta, el píxel no se carga.
+ */
+const rawPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim() ?? "";
+const META_PIXEL_ID = /^\d+$/.test(rawPixelId) ? rawPixelId : null;
+
+/**
+ * Código base oficial de Meta Pixel (init + PageView). Se monta una sola vez en el layout raíz.
+ * Las navegaciones internas de Next.js las registra el propio píxel (detecta los cambios de historial),
+ * por eso aquí no se envía ningún PageView adicional. Los eventos de conversión se gestionan desde Meta.
  */
 export default function MetaPixel() {
   if (!META_PIXEL_ID) return null;
@@ -15,7 +20,7 @@ export default function MetaPixel() {
     <>
       <Script
         id="meta-pixel"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${META_PIXEL_ID}');fbq('track','PageView');`,
         }}
@@ -30,7 +35,6 @@ export default function MetaPixel() {
           src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
         />
       </noscript>
-      <MetaPixelEvents />
     </>
   );
 }

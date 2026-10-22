@@ -48,18 +48,7 @@ Si falta o no es numérica, el píxel no se carga y la web funciona igual.
 
 ### Dónde se inicializa
 
-- `components/analytics/MetaPixel.tsx`: código base oficial (`init` + `PageView`), montado una sola vez en `app/layout.tsx` con `next/script` `beforeInteractive`.
-- `components/analytics/MetaPixelEvents.tsx`: `PageView` en navegaciones internas y un único listener de clics para los enlaces con `data-meta-event`.
-- `lib/meta-pixel.ts`: ID, parámetros de los eventos y `trackEvent()`.
+- `components/analytics/MetaPixel.tsx`: solo el código base oficial (`init` + `PageView`), montado una sola vez en `app/layout.tsx`.
 
-### Eventos
-
-| Evento | Cuándo | Parámetros |
-| --- | --- | --- |
-| `PageView` | Cada carga de página y cada navegación interna | — |
-| `ViewContent` | Al abrir `/pago` (una vez por visita) | `content_name`, `content_type: product`, `value`, `currency` (de `lib/event.ts`) |
-| `InitiateCheckout` | Clic en "Pagar con Hotmart" (`/pago`) | lo anterior + `num_items: 1` |
-| `Contact` | Clic en "Hablar con mi equipo" y "¿Tienes dudas? Escríbenos por WhatsApp" (`/pago`) | `content_name` |
-
-Para medir un enlace nuevo: `data-meta-event="Contact"` (o `metaEvent="Contact"` en `CTAButton`).
-Nunca se envían datos personales. **`Purchase` no se envía desde la web**: debe venir de Hotmart (píxel / API de Conversiones configurados en el producto de Hotmart) o de una integración de servidor que confirme el pago real.
+El código de la landing no envía ningún otro evento. Las navegaciones internas de Next.js las registra el propio píxel como `PageView` (detecta los cambios de historial).
+Los eventos de conversión se configuran y gestionan desde las herramientas de Meta.

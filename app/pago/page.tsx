@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import TrackViewContent from "@/components/analytics/TrackViewContent";
 import OfferPopup from "@/components/OfferPopup";
 import CheckoutProgress from "@/components/payment/CheckoutProgress";
 import OrderSummary from "@/components/payment/OrderSummary";
@@ -18,7 +17,6 @@ export const metadata: Metadata = {
 export default function PaymentPage() {
   return (
     <>
-      <TrackViewContent />
       <PaymentHeader />
       <main className="min-h-screen bg-mist">
         {/* Cabecera azul marino con progreso y título */}

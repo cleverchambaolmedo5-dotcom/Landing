@@ -57,7 +57,6 @@ export default function OrderSummary() {
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          data-meta-event="Contact"
           className="flex items-center justify-center gap-2 border-t border-navy/10 bg-mist px-6 py-4 text-[13px] font-semibold text-navy transition-colors hover:text-accent"
         >
           <Icon name="chat" strokeWidth={1.8} className="h-4 w-4" />
