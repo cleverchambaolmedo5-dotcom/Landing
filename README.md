@@ -34,3 +34,32 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Meta Pixel (Facebook / Instagram Ads)
+
+### Configuración
+
+| Variable | Valor | Dónde |
+| --- | --- | --- |
+| `NEXT_PUBLIC_META_PIXEL_ID` | ID numérico del píxel | `.env.local` (local, no se sube a Git) y variables de entorno de la app Node.js en Hostinger |
+
+La variable se incrusta **durante el build**: después de crearla o cambiarla en Hostinger hay que volver a desplegar (nuevo build).
+Si falta o no es numérica, el píxel no se carga y la web funciona igual.
+
+### Dónde se inicializa
+
+- `components/analytics/MetaPixel.tsx`: código base oficial (`init` + `PageView`), montado una sola vez en `app/layout.tsx` con `next/script` `beforeInteractive`.
+- `components/analytics/MetaPixelEvents.tsx`: `PageView` en navegaciones internas y un único listener de clics para los enlaces con `data-meta-event`.
+- `lib/meta-pixel.ts`: ID, parámetros de los eventos y `trackEvent()`.
+
+### Eventos
+
+| Evento | Cuándo | Parámetros |
+| --- | --- | --- |
+| `PageView` | Cada carga de página y cada navegación interna | — |
+| `ViewContent` | Al abrir `/pago` (una vez por visita) | `content_name`, `content_type: product`, `value`, `currency` (de `lib/event.ts`) |
+| `InitiateCheckout` | Clic en "Pagar con Hotmart" (`/pago`) | lo anterior + `num_items: 1` |
+| `Contact` | Clic en "Hablar con mi equipo" y "¿Tienes dudas? Escríbenos por WhatsApp" (`/pago`) | `content_name` |
+
+Para medir un enlace nuevo: `data-meta-event="Contact"` (o `metaEvent="Contact"` en `CTAButton`).
+Nunca se envían datos personales. **`Purchase` no se envía desde la web**: debe venir de Hotmart (píxel / API de Conversiones configurados en el producto de Hotmart) o de una integración de servidor que confirme el pago real.

@@ -85,6 +85,7 @@ export default function PaymentOptions() {
           <CTAButton
             href={whatsappUrl}
             external
+            metaEvent="Contact"
             variant="outline-dark"
             size="lg"
             className="w-full sm:w-auto sm:min-w-[16rem]"

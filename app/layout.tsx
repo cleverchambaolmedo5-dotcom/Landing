@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Montserrat } from "next/font/google";
+import MetaPixel from "@/components/analytics/MetaPixel";
 import { eventConfig } from "@/lib/event";
 import "./globals.css";
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         {children}
+        <MetaPixel />
       </body>
     </html>
   );

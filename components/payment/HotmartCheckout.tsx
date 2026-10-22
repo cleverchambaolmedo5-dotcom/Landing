@@ -47,6 +47,7 @@ export default function HotmartCheckout({ url, className = "" }: HotmartCheckout
         href={url}
         target="_blank"
         rel="noopener noreferrer"
+        data-meta-event="InitiateCheckout"
         onClick={(event) => {
           if (event.metaKey || event.ctrlKey || event.shiftKey) return;
           event.preventDefault();
