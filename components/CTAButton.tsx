@@ -1,6 +1,17 @@
-import type { ReactNode } from "react";
+"use client";
+
+import type { MouseEvent, ReactNode } from "react";
+import { trackInitiateCheckout } from "@/lib/analytics";
 import { getCtaHref } from "@/lib/event";
 import Icon from "./ui/Icon";
+
+/** Sección de la página donde está el botón (id de la <section>, o "header"/"footer"), para el parámetro cta_location. */
+function ctaLocation(element: HTMLElement): string | undefined {
+  const container = element.closest<HTMLElement>("section[id], header, footer, [role='dialog'], dialog");
+  if (!container) return undefined;
+  if (container.matches("[role='dialog'], dialog")) return "popup";
+  return container.id || container.tagName.toLowerCase();
+}
 
 type Variant = "primary" | "outline-light" | "outline-dark";
 type Size = "sm" | "md" | "lg";
@@ -46,7 +57,11 @@ export default function CTAButton({
   return (
     <a
       href={href}
-      onClick={onClick}
+      onClick={(event: MouseEvent<HTMLAnchorElement>) => {
+        // Todos los botones de compra miden InitiateCheckout en Meta Pixel.
+        trackInitiateCheckout(ctaLocation(event.currentTarget));
+        onClick?.();
+      }}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={`group inline-flex items-center justify-center gap-3 rounded-full text-center font-display font-bold tracking-[0.06em] uppercase sm:whitespace-nowrap sm:tracking-[0.08em] transition duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent active:translate-y-0 ${variants[variant]} ${sizes[size]} ${fullWidth ? "w-full" : ""} ${className}`}
     >
