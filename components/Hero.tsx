@@ -38,7 +38,7 @@ export default function Hero() {
           </Reveal>
 
           <Reveal delay={120}>
-            <h1 className="mx-auto mt-6 max-w-[24ch] font-display text-[1.95rem] leading-[1.05] font-extrabold tracking-tight text-balance text-white uppercase [text-shadow:0_0_4px_rgb(255_255_255/0.35),0_0_18px_rgb(245_106_10/0.55),0_0_42px_rgb(245_106_10/0.35),0_2px_18px_rgb(0_0_0/0.35)] sm:mt-7 sm:text-5xl md:text-6xl xl:text-[4.25rem]">
+            <h1 className="mx-auto mt-6 max-w-[24ch] font-display text-[1.95rem] leading-[1.05] font-extrabold tracking-tight text-balance text-white uppercase drop-shadow-[0_2px_18px_rgb(0_0_0/0.35)] sm:mt-7 sm:text-5xl md:text-6xl xl:text-[4.25rem]">
               ¿<span className="text-accent">Trabajas</span> más, pero tu <span className="text-accent">dinero</span>{" "}
               no crece?
             </h1>

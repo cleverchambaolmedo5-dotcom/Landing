@@ -75,8 +75,8 @@ export default function HeroVideoBackground() {
         />
       )}
       {/* Overlay azul marino con degradado hacia abajo: deja ver el video y asegura la lectura del texto */}
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950/70 via-navy/65 to-navy/95" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgb(11_22_40/0.55)_100%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-950/80 via-navy/75 to-navy/95" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgb(11_22_40/0.6)_100%)]" />
     </div>
   );
 }
