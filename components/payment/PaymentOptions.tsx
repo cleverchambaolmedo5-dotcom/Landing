@@ -86,6 +86,7 @@ export default function PaymentOptions() {
             href={whatsappUrl}
             external
             variant="outline-dark"
+            trackCheckout
             size="lg"
             className="w-full sm:w-auto sm:min-w-[16rem]"
           >

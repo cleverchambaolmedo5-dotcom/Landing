@@ -28,6 +28,11 @@ interface CTAButtonProps {
   onClick?: () => void;
   /** Abre el enlace en una pestaña nueva (WhatsApp, Hotmart). */
   external?: boolean;
+  /**
+   * Envía InitiateCheckout a Meta Pixel al hacer clic.
+   * Por defecto solo los botones naranjas (variant "primary"); los demás deben activarlo explícitamente.
+   */
+  trackCheckout?: boolean;
 }
 
 const variants: Record<Variant, string> = {
@@ -53,13 +58,13 @@ export default function CTAButton({
   className = "",
   onClick,
   external = false,
+  trackCheckout = variant === "primary",
 }: CTAButtonProps) {
   return (
     <a
       href={href}
       onClick={(event: MouseEvent<HTMLAnchorElement>) => {
-        // Todos los botones de compra miden InitiateCheckout en Meta Pixel.
-        trackInitiateCheckout(ctaLocation(event.currentTarget));
+        if (trackCheckout) trackInitiateCheckout(ctaLocation(event.currentTarget));
         onClick?.();
       }}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
