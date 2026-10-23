@@ -22,7 +22,8 @@ export default function Hero() {
         <div className="mx-auto flex max-w-6xl flex-col items-center">
           <Reveal>
             {/* En móvil se parte en dos líneas por el separador; desde sm, una sola línea */}
-            <p className="inline-flex flex-col items-center justify-center gap-x-2 gap-y-0.5 rounded-2xl sm:flex-row border border-white/20 bg-white/10 px-4 py-1.5 text-[10px] font-semibold tracking-[0.14em] text-white uppercase backdrop-blur-md sm:rounded-full sm:text-xs sm:tracking-[0.2em]">
+            {/* Brillo neón naranja: borde, halo exterior e interior y texto ligeramente iluminado */}
+            <p className="inline-flex flex-col items-center justify-center gap-x-2 gap-y-0.5 rounded-2xl border border-accent/80 bg-navy/55 px-4 py-1.5 text-[10px] font-semibold tracking-[0.14em] text-white uppercase shadow-[0_0_10px_rgb(245_106_10/0.6),0_0_30px_rgb(245_106_10/0.35),inset_0_0_12px_rgb(245_106_10/0.3)] backdrop-blur-md [text-shadow:0_0_8px_rgb(245_106_10/0.7)] sm:flex-row sm:rounded-full sm:text-xs sm:tracking-[0.2em]">
               <span className="inline-flex items-center gap-2 whitespace-nowrap">
                 <Icon name="calendar" strokeWidth={1.8} className="h-3.5 w-3.5 shrink-0 text-accent" />
                 5 de diciembre de 2026
@@ -37,7 +38,7 @@ export default function Hero() {
           </Reveal>
 
           <Reveal delay={120}>
-            <h1 className="mx-auto mt-6 max-w-[24ch] font-display text-[1.95rem] leading-[1.05] font-extrabold tracking-tight text-balance text-white uppercase drop-shadow-[0_2px_18px_rgb(0_0_0/0.35)] sm:mt-7 sm:text-5xl md:text-6xl xl:text-[4.25rem]">
+            <h1 className="mx-auto mt-6 max-w-[24ch] font-display text-[1.95rem] leading-[1.05] font-extrabold tracking-tight text-balance text-white uppercase [text-shadow:0_0_4px_rgb(255_255_255/0.35),0_0_18px_rgb(245_106_10/0.55),0_0_42px_rgb(245_106_10/0.35),0_2px_18px_rgb(0_0_0/0.35)] sm:mt-7 sm:text-5xl md:text-6xl xl:text-[4.25rem]">
               ¿<span className="text-accent">Trabajas</span> más, pero tu <span className="text-accent">dinero</span>{" "}
               no crece?
             </h1>
