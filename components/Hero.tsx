@@ -38,7 +38,8 @@ export default function Hero() {
 
           <Reveal delay={120}>
             <h1 className="mx-auto mt-6 max-w-[24ch] font-display text-[1.95rem] leading-[1.05] font-extrabold tracking-tight text-balance text-white uppercase drop-shadow-[0_2px_18px_rgb(0_0_0/0.35)] sm:mt-7 sm:text-5xl md:text-6xl xl:text-[4.25rem]">
-              ¿Trabajas cada vez más, pero tu dinero no crece como esperabas?
+              ¿<span className="text-accent">Trabajas</span> más, pero tu <span className="text-accent">dinero</span>{" "}
+              no crece?
             </h1>
           </Reveal>
 
